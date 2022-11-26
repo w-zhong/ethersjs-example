@@ -1,13 +1,14 @@
 //介绍ethers.js的Provider类，并用Alchemy的节点API Key创建了jsonRpcProvider，读取了ETH主网和Goerli测试网的链上信息
 
+require("dotenv").config();
 const { ethers } = require("ethers");
 
-const ALCHEMY_ETH_URL =
-  "https://eth-mainnet.g.alchemy.com/v2/eWZN5QXcUQ1EqAM4Y_U7dQRUjqzQIpxq";
-const ALCHEMY_GOE_URL =
-  "https://eth-goerli.g.alchemy.com/v2/QHuK_UWQFN2WsF4XmO5DRYtqHDrp8ENm";
-const providerETH = new ethers.providers.JsonRpcProvider(ALCHEMY_ETH_URL);
-const providerGOE = new ethers.providers.JsonRpcProvider(ALCHEMY_GOE_URL);
+const providerETH = new ethers.providers.JsonRpcProvider(
+  process.env.ALCHEMY_ETH_URL
+);
+const providerGOE = new ethers.providers.JsonRpcProvider(
+  process.env.ALCHEMY_GOE_URL
+);
 
 const main = async () => {
   ////主网Mainnet内容////
@@ -34,6 +35,16 @@ const main = async () => {
   console.log("\n5. Gas Fee");
   const feeDataETH = await providerETH.getFeeData();
   console.log(feeDataETH);
+  //6. 查询区块信息
+  console.log("\n6. Block Info");
+  const blockETH = await providerETH.getBlock();
+  console.log(blockETH);
+  //7. 查询WETH合约字节码
+  console.log("\n7. WETH Contract Bytecode");
+  const codeETH = await providerETH.getCode(
+    "0xc778417e063141139fce010982780140aa0cd5ab"
+  );
+  console.log(codeETH);
 
   console.log("\n\n");
 
@@ -61,6 +72,16 @@ const main = async () => {
   console.log("\n5. Gas Fee");
   const feeDataGOE = await providerGOE.getFeeData();
   console.log(feeDataGOE);
+  //6. 查询区块信息
+  console.log("\n6. Block Info");
+  const blockGOE = await providerGOE.getBlock();
+  console.log(blockGOE);
+  //7. 查询WETH合约字节码
+  console.log("\n7. WETH Contract Bytecode");
+  const codeGOE = await providerGOE.getCode(
+    "0x9BCfCF38F277f37B1Bc7505a9f58ce1AA84708a5"
+  );
+  console.log(codeGOE);
 };
 
 main();
