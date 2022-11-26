@@ -15,7 +15,7 @@ const main = async () => {
   //1. 读取Vitalik的ETH余额
   const balanceETH = await providerETH.getBalance(`vitalik.eth`);
   console.log(
-    `1. ETH Balance of Vitalik on Mainnet: ${ethers.utils.formatEther(
+    `\n1. ETH Balance of Vitalik on Mainnet: ${ethers.utils.formatEther(
       balanceETH
     )} ETH`
   );
