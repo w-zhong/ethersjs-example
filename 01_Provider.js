@@ -28,8 +28,12 @@ const main = async () => {
   console.log(blockNumberETH);
   //4. 查询gas price
   console.log("\n4. Gas Price");
-  const gasPriceETH = await (await providerETH.getGasPrice()).toNumber();
+  const gasPriceETH = await providerETH.getGasPrice();
   console.log(gasPriceETH);
+  //5. 查询建议gas设置
+  console.log("\n5. Gas Fee");
+  const feeDataETH = await providerETH.getFeeData();
+  console.log(feeDataETH);
 
   console.log("\n\n");
 
@@ -51,8 +55,12 @@ const main = async () => {
   console.log(blockNumberGOE);
   //4. 查询gas price
   console.log("\n4. Gas Price");
-  const gasPriceGOE = await (await providerGOE.getGasPrice()).toNumber();
+  const gasPriceGOE = await providerGOE.getGasPrice();
   console.log(gasPriceGOE);
+  //5. 查询建议gas设置
+  console.log("\n5. Gas Fee");
+  const feeDataGOE = await providerGOE.getFeeData();
+  console.log(feeDataGOE);
 };
 
 main();
