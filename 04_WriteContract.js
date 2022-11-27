@@ -1,5 +1,5 @@
 //介绍ethers中的Contract合约类，并创建了WETH的可写Contract实例
-//通过deposit（）和transfer（）实现了合约写入/区块链状态更改
+//通过deposit()和transfer()实现了合约写入/区块链状态更改
 
 require("dotenv").config();
 const { _nameprepTableA1 } = require("@ethersproject/strings/lib/idna");
