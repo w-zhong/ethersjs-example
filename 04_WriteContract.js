@@ -2,7 +2,6 @@
 //通过deposit()和transfer()实现了合约写入/区块链状态更改
 
 require("dotenv").config();
-const { _nameprepTableA1 } = require("@ethersproject/strings/lib/idna");
 const { ethers } = require("ethers");
 
 const provider = new ethers.providers.JsonRpcProvider(
