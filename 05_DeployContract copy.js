@@ -1,4 +1,5 @@
-//
+//利用ContractFatory类型进行合约部署
+//挖10000个token并且发送1000个给Vitalik
 
 require("dotenv").config();
 const { ethers } = require("ethers");
@@ -30,32 +31,26 @@ const main = async () => {
 
   console.log("\n1. Deploy ERC20 Contract");
   const contractERC20 = await factoryERC20.deploy("JW Token", "JWT");
-  console.log(`合约地址: ${contractERC20.address}`);
-  console.log("部署合约的交易详情");
+  console.log(`Contact Address: ${contractERC20.address}`);
+  console.log("Deploy Tx Info:");
   console.log(contractERC20.deployTransaction);
-  console.log("\n等待合约部署上链");
   await contractERC20.deployed();
-  console.log("合约已上链");
 
-  // 打印合约的name()和symbol()，然后调用mint()函数，给自己地址mint 10,000代币
-  console.log("\n2. 调用mint()函数，给自己地址mint 10,000代币");
-  console.log(`合约名称: ${await contractERC20.name()}`);
-  console.log(`合约代号: ${await contractERC20.symbol()}`);
+  console.log("\n2. Mint 10,000 Token");
+  console.log(`Token Name: ${await contractERC20.name()}`);
+  console.log(`Token Symbol: ${await contractERC20.symbol()}`);
   let tx = await contractERC20.mint("10000");
-  console.log("等待交易上链");
   await tx.wait();
   console.log(
-    `mint后地址中代币余额: ${await contractERC20.balanceOf(wallet.address)}`
+    `Token Balance: ${await contractERC20.balanceOf(wallet.address)}`
   );
-  console.log(`代币总供给: ${await contractERC20.totalSupply()}`);
+  console.log(`Total Supply: ${await contractERC20.totalSupply()}`);
 
-  // 3. 调用transfer()函数，给V神转账1000代币
-  console.log("\n3. 调用transfer()函数，给V神转账1,000代币");
+  console.log("\n3. Transfer 1,000 JWT to Vitalik");
   tx = await contractERC20.transfer("vitalik.eth", "1000");
-  console.log("等待交易上链");
   await tx.wait();
   console.log(
-    `V神钱包中的代币余额: ${await contractERC20.balanceOf("vitalik.eth")}`
+    `JWT Balance for Vitalik: ${await contractERC20.balanceOf("vitalik.eth")}\n`
   );
 };
 
