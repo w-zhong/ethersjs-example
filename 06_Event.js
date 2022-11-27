@@ -1,5 +1,5 @@
-//如何用ethers检索智能合约释放的事件
-//要检索的事件必须包含在合约abi中
+//事件检索contract.quereyfilter("eventName", 起始区块, 结束区块)
+//事件监听contract.on("eventName", function), 单次事件监听contract.once("eventName", function)
 
 require("dotenv").config();
 const { ethers } = require("ethers");
@@ -35,6 +35,26 @@ const main = async () => {
   console.log(
     `Address ${transferEvents[0].args["from"]} Transfer ${amount} WETH to Address ${transferEvents[0].args["to"]}`
   );
+
+  console.log("\n3. Event Listener Once");
+  contractWETH.once("Transfer", (from, to, amount) => {
+    console.log(
+      `${from} -> ${to} ${ethers.utils.formatUnits(
+        ethers.BigNumber.from(amount),
+        18
+      )}`
+    );
+  });
+
+  console.log("\n4. Event Listener");
+  contractWETH.on("Transfer", (from, to, amount) => {
+    console.log(
+      `${from} -> ${to} ${ethers.utils.formatUnits(
+        ethers.BigNumber.from(amount),
+        18
+      )}`
+    );
+  });
 };
 
 main();
