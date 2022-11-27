@@ -1,4 +1,5 @@
-//介绍ethers中的Contract合约类，并创建了WETH和DAI的只读Contract实例，成功读取了V神这两个币的持仓
+//介绍ethers中的Contract合约类，并创建了WETH和DAI的只读Contract实例
+//读取了V神这两个币的持仓，并没有改变区块链的状态
 
 require("dotenv").config();
 const { ethers } = require("ethers");
