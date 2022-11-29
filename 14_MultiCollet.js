@@ -99,7 +99,6 @@ const main = async () => {
     console.log(
       `归集后ETH持仓: ${ethers.utils.formatEther(balanceETHAfter)}\n`
     );
-  } 
   }
 };
 
